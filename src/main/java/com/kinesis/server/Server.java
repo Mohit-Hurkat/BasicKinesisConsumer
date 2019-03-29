@@ -14,7 +14,6 @@ import org.springframework.context.annotation.ImportResource;
  * Created by mohit.hurkat.
  */
 
-@Configuration
 @ImportResource({"classpath*:applicationContext.xml"})
 @SpringBootApplication
 public class Server {
