@@ -1,7 +1,7 @@
 package com.kinesis.server;
 
 /**
- * Created by mohit.hurkat on 15-Nov-18.
+ * Created by mohit.hurkat.
  */
 public class LoggerPattern {
 

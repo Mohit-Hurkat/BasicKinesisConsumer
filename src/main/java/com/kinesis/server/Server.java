@@ -6,13 +6,15 @@ import org.slf4j.LoggerFactory;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.ImportResource;
 
 
 /**
- * Created by mohit.hurkat on 15-Nov-18.
+ * Created by mohit.hurkat.
  */
 
+@Configuration
 @ImportResource({"classpath*:applicationContext.xml"})
 @SpringBootApplication
 public class Server {

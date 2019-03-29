@@ -7,44 +7,35 @@ import com.amazonaws.services.kinesis.clientlibrary.lib.worker.InitialPositionIn
 import com.amazonaws.services.kinesis.clientlibrary.lib.worker.KinesisClientLibConfiguration;
 import com.amazonaws.services.kinesis.clientlibrary.lib.worker.Worker;
 import com.amazonaws.services.kinesis.metrics.impl.NullMetricsFactory;
-import com.kinesis.server.ServiceLocatorFactory;
-import com.kinesis.service.LoadPropertyService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 
 import java.security.Security;
 
-public class KinesisConsumer {
 
-    @Autowired
-    private LoadPropertyService loadPropertyService;
+public class KinesisConsumer {
 
     private static Logger logger = LoggerFactory.getLogger(KinesisConsumer.class);
     private static final String NETWORK_CACHE_TTL = "networkaddress.cache.ttl";
     private static final String DEFAULT_NETWORK_CACHE_TTL = "60";
     private static final InitialPositionInStream STREAM_LATEST = InitialPositionInStream.LATEST;
-    private String applicationName;
-    private String streamName;
-    private String region;
-    private String accessKey;
-    private String secretKey;
+
 
 
     public KinesisConsumer() {
 
-        KinesisClientLibConfiguration clientLibConfiguration = null;
+        String streamName = "streamName";
+        String applicationName = "applicationName";
+        String region = "region";
+        String accessKey = "accessKey";
+        String secretKey = "secretKey";
+        String workerId = "workerId-0001";
+
         try {
-            streamName = (String) getLoadPropertyService().getProperty("streamNameConsumer");
-            applicationName = (String) getLoadPropertyService().getProperty("applicationName");
-            region = (String) getLoadPropertyService().getProperty("region");
-            accessKey = (String) getLoadPropertyService().getProperty("accessKey");
-            secretKey = (String) getLoadPropertyService().getProperty("secretKey");
-            String workerId = (String) getLoadPropertyService().getProperty("workerId");
             Security.setProperty(NETWORK_CACHE_TTL, DEFAULT_NETWORK_CACHE_TTL);
             BasicAWSCredentials awsCreds = new BasicAWSCredentials
                     (accessKey, secretKey);
-            clientLibConfiguration =
+            KinesisClientLibConfiguration clientLibConfiguration =
                     new KinesisClientLibConfiguration(applicationName + streamName,
                             streamName,
                             new AWSStaticCredentialsProvider(awsCreds),
@@ -67,12 +58,5 @@ public class KinesisConsumer {
             logger.error("Failed to create configuration.", e);
             e.printStackTrace();
         }
-    }
-
-    private LoadPropertyService getLoadPropertyService() {
-        if (loadPropertyService == null) {
-            loadPropertyService = ServiceLocatorFactory.getService(LoadPropertyService.class);
-        }
-        return loadPropertyService;
     }
 }
