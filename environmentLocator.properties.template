@@ -1,0 +1,12 @@
+project.env=qa
+
+#AWS
+streamNameProducer = qa
+streamNameConsumer = prodClickStreamPersonalization
+applicationName = ClickQa
+workerId = Click-0001
+useKinesalite = false
+activeConsumer = true
+region = ap-south-1
+accessKey = accessKey
+secretKey = secretKey

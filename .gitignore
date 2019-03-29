@@ -1,0 +1,7 @@
+.idea/
+target/
+logs/
+environmentLocator.properties
+src/main/resources/environment.properties
+src/main/main.iml
+BasicKinesisConsumer.iml
